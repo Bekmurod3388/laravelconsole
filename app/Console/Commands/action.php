@@ -108,8 +108,7 @@ class action extends Command
             }
 
             $choosenproduct = $this->choice('which product do you choose?', $purchase_list);
-//            $product = Db::table('purchases')->where(['product'=>$choosenproduct])->first();
-//            var_export($product);
+
             return $choosenproduct;
         }
         catch (Exception $ex)
@@ -135,14 +134,7 @@ class action extends Command
                 $xabar = 'You made the purchase:' . $choosenp . ' $';
 
                 Mail::to($choosenmail)->send(new Email($xabar));
-                /*--Mail::send('email', $data, function ($message) {
 
-                    $message->from('task3388@gmail.com');
-
-                    $message->to('bekmurod3388@gmail.com')
-                        ->subject('Payment');
-
-                });--*/
                 $this->info('The emails are send successfully!');
                 DB::table('logs')->insert(
                     [
