@@ -7,6 +7,7 @@ In order to run this project, you need a web server and mysql (for example, XAMP
 * please open terminal
 * cd into the project folder which is earlier unzipped or cloned
 * run project by typing:
+    * composer install
     * php artisan migrate --seed
 
 ** Console commands for task **
