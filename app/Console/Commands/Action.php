@@ -9,6 +9,8 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Mockery\Exception;
+use Nexmo\Laravel\Facade\Nexmo;
+
 
 class action extends Command
 {
@@ -123,6 +125,8 @@ class action extends Command
         }
     }
 
+
+
     public function handle()
     {
         try {
@@ -145,6 +149,20 @@ class action extends Command
             } else {
                 $choosensms = $this->smsnumber();
                 $choosenp = $this->choosepurchase();
+
+
+                //nexmo============================================
+
+                Nexmo::message()->send([
+                    'to'=>$choosensms,
+                    'from'=>'+998977913883',
+                    'text'=>'You made the purchase:' . $choosenp . ' $',
+                ]);
+
+
+                //=================================================
+
+
                 $this->info('The sms are send successfully!');
                 DB::table('logs')->insert(
                     [
